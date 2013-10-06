@@ -1,0 +1,9 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/Mock/TestModule.pm
+t/Test-Mock-Simple.t
+t/TestModule.pm
+lib/Test/Mock/Simple.pm
+META.yml                                 Module meta-data (added by MakeMaker)
