@@ -1,10 +1,10 @@
 package Test::Mock::Simple;
 
-use 5.014002;
+use 5.008008;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub new {
   my $package = shift;
