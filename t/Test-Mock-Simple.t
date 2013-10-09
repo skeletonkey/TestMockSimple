@@ -9,7 +9,7 @@ use strict;
 use warnings;
 use lib 't/';
 
-use Test::More tests => 6;
+use Test::More tests => 7;
 
 BEGIN {
   use_ok('Test::Mock::Simple');
@@ -27,3 +27,5 @@ is($test->one, 'eins', 'Got Mocked One');
 is($test->two, 2, 'Got Real Two');
 is($test->three, 3, 'Got Real Three');
 is($test->rooster, 'kikeriki', 'Got Mocked Rooster');
+
+is($test->add, 'No namespace conflicts', 'Able to add an "add" method');

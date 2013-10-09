@@ -6,7 +6,8 @@ use warnings;
 use Test::Mock::Simple;
 
 my $mock = Test::Mock::Simple->new(module => 'TestModule');
-$mock->it(one     => sub { return 'eins';     });
-$mock->it(rooster => sub { return 'kikeriki'; });
+$mock->add(one     => sub { return 'eins';                   });
+$mock->add(rooster => sub { return 'kikeriki';               });
+$mock->add(add     => sub { return 'No namespace conflicts'; });
 
 1;

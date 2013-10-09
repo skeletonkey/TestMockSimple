@@ -31,7 +31,7 @@ sub initialize {
   require $module;
 }
 
-sub it {
+sub add {
   my $self = shift;
   my $name = shift;
   my $sub = shift;
@@ -61,9 +61,17 @@ Test::Mock::Simple - A simple way to mock out parts of or a whole module.
 
   use Test::Mock::Simple;
 
-  my $mock = Test::Mock::Simple->new(module => 'Module::To::Be::Mocked');
+  my $total = 0; 
 
-  $mock->it(add => sub { return mocked_add_method(@_); });
+  # Original::Module has methods increase, decrease, and sum
+  my $mock = Test::Mock::Simple->new(module => 'Original::Module');
+  $mock->add(increase => sub { shift; return $total += shift; }); 
+  $mock->add(decrease => sub { shift; return $total -= shift; }); 
+  
+  my $obj = Original::Module->new(); 
+  $obj->increase(5); 
+  $obj->decrease(2); 
+  print $obj->sum . "\n"; # prints 3 
 
 =head1 DESCRIPTION
 
@@ -95,13 +103,11 @@ so that when you get around to mocking things they will override the module.
 
 =back
 
-=item it
+=item add
 
 This allows you to specify a new method (subroutine) that will override the
-existing one.
-
-The reason for the strange naming convention is because I like the way that
-'$mock->it(...)' reads.
+existing one. Think of it as 'add'ing a mocked method to override the existing
+one.
 
 =back
 
@@ -116,6 +122,5 @@ Copyright (C) 2013 by Erik Tank
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.14.2 or,
 at your option, any later version of Perl 5 you may have available.
-
 
 =cut
