@@ -1,5 +1,9 @@
 Revision history for Perl extension Test::Mock::Simple.
 
+0.02  Wed Oct  9 10:46:00 2013
+	- changed method 'it' to 'add'
+	- lowered required perl method to 5.8.8
+
 0.01  Fri Oct  4 10:21:24 2013
 	- original version; created by h2xs 1.23 with options
 		-AXn Test::Mock::Simple
