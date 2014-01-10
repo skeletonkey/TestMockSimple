@@ -1,5 +1,8 @@
 Revision history for Perl extension Test::Mock::Simple.
 
+0.04  Wed Jan 10 09:28:00 2014
+	- Added TEST_MOCK_SIMPLE_DISABLE
+
 0.03  Wed Oct 11 11:08:00 2013
 	- updated (downgraded) perl version in Makefile.PL
 

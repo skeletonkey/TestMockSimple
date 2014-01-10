@@ -4,7 +4,7 @@ use 5.008008;
 use strict;
 use warnings;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub new {
   my $package = shift;
@@ -35,6 +35,8 @@ sub add {
   my $self = shift;
   my $name = shift;
   my $sub = shift;
+
+  return if $ENV{TEST_MOCK_SIMPLE_DISABLE};
 
   if (!$name || $sub) {
     require Carp;
@@ -75,16 +77,26 @@ Test::Mock::Simple - A simple way to mock out parts of or a whole module.
 
 =head1 DESCRIPTION
 
-This is a simple method of overriding any number of methods for a give
-object/class.
+This is a simple way of overriding any number of methods for a give object/class.
 
 Can be used directly in test (or any) files, but best practice (IMHO) is to
 create a 'Mock' module and using it instead of directly using the module in your
-tests.
+tests. The goal is to write a test which passes whether you're Mocking or not.
+See TEST_MOCK_SIMPLE_DISABLE below.
 
 Why another Mock module?  I needed something simple with no bells or whistles
 that only overrode certain methods of a given module. It's more work, but there
 aren't any conflicts.
+
+=head3 Environmental Variables
+
+=over 4
+
+=item TEST_MOCK_SIMPLE_DISABLE
+
+If set to true (preferably 1) then a 'add' is disabled.
+
+=back
 
 =head3 Methods
 
