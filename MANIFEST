@@ -3,6 +3,7 @@ Makefile.PL
 MANIFEST
 README
 t/Mock/TestModule.pm
+t/Failures.t
 t/Test-Mock-Simple.t
 t/TestModule.pm
 lib/Test/Mock/Simple.pm

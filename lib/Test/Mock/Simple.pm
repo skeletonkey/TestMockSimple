@@ -4,7 +4,7 @@ use 5.008008;
 use strict;
 use warnings;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 sub new {
   my $package = shift;
@@ -22,8 +22,8 @@ sub initialize {
   my $self = shift;
 
   if (!$self->{module}) {
-    requrie Carp;
-    Carp::croak("No module name provice to mock");
+    require Carp;
+    Carp::croak("No module name provided to mock");
   }
 
   my $module = $self->{module} . '.pm';
@@ -38,10 +38,10 @@ sub add {
 
   return if $ENV{TEST_MOCK_SIMPLE_DISABLE};
 
-  if (!$name || $sub) {
+  if (!$name || !$sub) {
     require Carp;
     Carp::croak("No method name provided to mock") unless $name;
-    Carp::croak("No subroutine name provided to mock") unless $sub;
+    Carp::croak("No sub ref provided to mock") unless $sub;
   }
 
   {
