@@ -4,7 +4,7 @@ use 5.008008;
 use strict;
 use warnings;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 my $allow_new_methods = 0;
 
@@ -49,9 +49,6 @@ sub add {
   }
 
   if (!$allow_new_methods) {
-      use Erik;
-      Erik::stackTrace;
-      Erik::vars(module => $self->{module}, name => $name);
       die("Module (" . $self->{module} . ") does not have a method named '$name'\n")
         unless $self->{module}->can($name);
   }

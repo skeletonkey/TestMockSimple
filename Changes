@@ -1,5 +1,8 @@
 Revision history for Perl extension Test::Mock::Simple.
 
+0.08  Sat Dec  7 08:39:00 2014
+    - Removed my debugging module which I accidentally deployed
+
 0.07  Sat Dec  6 20:48:00 2014
 	- Added 'allow_new_methods' flag
       This breaks backwards compatibility, however, the arguments for including
