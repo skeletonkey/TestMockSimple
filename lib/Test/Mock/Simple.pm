@@ -92,17 +92,21 @@ Test::Mock::Simple - A simple way to mock out parts of or a whole module.
 This is a simple way of overriding any number of methods for a given object/class.
 
 Can be used directly in test (or any) files, but best practice (IMHO) is to
-create a 'Mock' module and using it instead of directly using the module in your
-tests. The goal is to write a test which passes whether you're Mocking or not.
-See TEST_MOCK_SIMPLE_DISABLE below.
+create a 'Mock' module and using it instead of directly using the module in any
+tests. The goal is to write a test which passes whether Mocking is being used or
+not. See TEST_MOCK_SIMPLE_DISABLE below.
 
 The default behavior is to not allow adding methods that do not exist.  This
-should stop you from mistyping method names when you are attempting to mock
-existing methods. See allow_new_methods below to change this behavior.
+should stop mistyped method names when attempting to mock existing methods.
+See allow_new_methods below to change this behavior.
 
 Why another Mock module?  I needed something simple with no bells or whistles
 that only overrode certain methods of a given module. It's more work, but there
 aren't any conflicts.
+
+This module can not do anything about BEGIN, END, or other special name code
+blocks.  To changes these see B's (The Perl Compiler Backend) begin_av, end_av,
+etc. methods.
 
 =head3 Environmental Variables
 
@@ -126,9 +130,11 @@ Create a new mock simple object.
 
 =item module
 
-The name of the module that is being mocked.  The module will be loaded first
-(by requiring it) so that when you get around to mocking things they will
-override the module's methods.
+The name of the module that is being mocked.  The module will be loaded
+immediately (by requiring it).
+
+NOTE: since require is being used to load the module it's import method is not
+being called.  This may change in later versions.
 
 =back
 
@@ -136,18 +142,16 @@ override the module's methods.
 
 =item allow_new_methods
 
-If you want to create methods that do not exist in the module that you are
-mocking.
+To create methods that do not exist in the module that is being mocked.
 
 The default behavior is to not allow adding methods that do not exist.  This
-should stop you from mistyping method names when you are attempting to mock
-existing methods.
+should stop mistyping method names when attempting to mock existing methods.
 
 =back
 
 =item add
 
-This allows you to specify a new method (subroutine) that will override the
+This allows for the creation of a new method (subroutine) that will override the
 existing one. Think of it as 'add'ing a mocked method to override the existing
 one.
 
