@@ -1,5 +1,11 @@
 Revision history for Perl extension Test::Mock::Simple.
 
+0.07  Sat Dec  6 20:48:00 2014
+	- Added 'allow_new_methods' flag
+      This breaks backwards compatibility, however, the arguments for including
+      this flag have been persuasive enough for me to break it.
+      Hopefully, this only creates a small headache for anyone using Test::Mock::Simple.
+
 0.06  Sun Aug 31 21:27:00 2014
 	- Rewrote Failures without Test::Exception
 

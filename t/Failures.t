@@ -9,7 +9,7 @@ use strict;
 use warnings;
 use lib 't/';
 
-use Test::More tests => 4;
+use Test::More tests => 5;
 
 BEGIN {
   use_ok('Test::Mock::Simple');
@@ -30,3 +30,7 @@ like($@, qr/^No method name provided/, 'add with no args');
 
 eval { $mock->add( 'sub' ); };
 like($@, qr/^No sub ref provided/, 'add with no sub ref provided');
+
+eval { require Mock::StrictModule; };
+like($@, qr/^Module \(StrictModule\) does not have a method named 'add'/,
+  'create method that does not exist');
