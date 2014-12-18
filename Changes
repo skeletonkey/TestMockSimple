@@ -1,5 +1,8 @@
 Revision history for Perl extension Test::Mock::Simple.
 
+0.081 Thu Dec 18 14:07:00 2014
+    - fix tarball - used Mac's broken tar to create the tardist
+
 0.08  Sat Dec  7 08:39:00 2014
     - Removed my debugging module which I accidentally deployed
 

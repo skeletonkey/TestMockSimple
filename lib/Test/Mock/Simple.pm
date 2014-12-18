@@ -4,7 +4,7 @@ use 5.008008;
 use strict;
 use warnings;
 
-our $VERSION = '0.08';
+our $VERSION = '0.081';
 
 my $allow_new_methods = 0;
 
