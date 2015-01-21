@@ -15,14 +15,6 @@ sub new {
   my $self = {@_};
   bless($self, $class);
 
-  $self->initialize;
-
-  return $self;
-}
-
-sub initialize {
-  my $self = shift;
-
   if (!$self->{module}) {
     require Carp;
     Carp::croak("No module name provided to mock");
@@ -33,6 +25,8 @@ sub initialize {
   require $module;
 
   $allow_new_methods = 1 if $self->{allow_new_methods};
+
+  return $self;
 }
 
 sub add {
@@ -42,10 +36,13 @@ sub add {
 
   return if $ENV{TEST_MOCK_SIMPLE_DISABLE};
 
-  if (!$name || !$sub) {
+  if (!$name) {
     require Carp;
-    Carp::croak("No method name provided to mock") unless $name;
-    Carp::croak("No sub ref provided to mock") unless $sub;
+    Carp::croak("No method name provided to mock");
+  }
+  if (!$sub) {
+    require Carp;
+    Carp::croak("No sub ref provided to mock");
   }
 
   if (!$allow_new_methods) {

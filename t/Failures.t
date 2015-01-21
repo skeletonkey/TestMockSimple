@@ -9,7 +9,7 @@ use strict;
 use warnings;
 use lib 't/';
 
-use Test::More tests => 5;
+use Test::More tests => 7;
 
 BEGIN {
   use_ok('Test::Mock::Simple');
@@ -24,6 +24,14 @@ eval { my $mock = Test::Mock::Simple->new(); };
 like($@, qr/^No module name provided/, 'new with no args');
 
 my $mock = Test::Mock::Simple->new(module => 'TestModule');
+my $mock2 = $mock->new(module => 'TestModule');
+
+{
+    no strict;
+    no warnings;
+    eval { my $mock3 = Test::Mock::Simple::new(); };
+    like($@, qr/No module name provided/, 'trying to call new incorrectly');
+}
 
 eval { $mock->add(); };
 like($@, qr/^No method name provided/, 'add with no args');
@@ -34,3 +42,5 @@ like($@, qr/^No sub ref provided/, 'add with no sub ref provided');
 eval { require Mock::StrictModule; };
 like($@, qr/^Module \(StrictModule\) does not have a method named 'add'/,
   'create method that does not exist');
+
+ok($mock->add('one' => sub { return 'This is a test'; }), 'making sure add still works');
