@@ -9,7 +9,7 @@ use strict;
 use warnings;
 use lib 't/';
 
-use Test::More tests => 7;
+use Test::More tests => 6;
 
 BEGIN {
   use_ok('Test::Mock::Simple');
@@ -25,13 +25,6 @@ like($@, qr/^No module name provided/, 'new with no args');
 
 my $mock = Test::Mock::Simple->new(module => 'TestModule');
 my $mock2 = $mock->new(module => 'TestModule');
-
-{
-    no strict;
-    no warnings;
-    eval { my $mock3 = Test::Mock::Simple::new(); };
-    like($@, qr/No module name provided/, 'trying to call new incorrectly');
-}
 
 eval { $mock->add(); };
 like($@, qr/^No method name provided/, 'add with no args');
