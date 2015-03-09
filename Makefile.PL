@@ -9,4 +9,16 @@ WriteMakefile(
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Test/Mock/Simple.pm', # retrieve abstract from module
        AUTHOR         => 'Erik Tank <tank@jundy.com>') : ()),
+    ($ExtUtils::MakeMaker::VERSION >= 6.3002 ? ('LICENSE'  => 'perl', ) : ()),
+    (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
+    'meta-spec' => { version => 2 },
+     resources => {
+         repository => {
+             type => 'git',
+             url  => 'https://github.com/skeletonkey/TestMockSimple.git',
+             web  => 'https://github.com/skeletonkey/TestMockSimple',
+         },
+     }})
+     : ()
+    ),
 );
