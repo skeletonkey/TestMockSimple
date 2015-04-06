@@ -1,5 +1,8 @@
 Revision history for Perl extension Test::Mock::Simple.
 
+0.09 Mon Apr  6 14:16:00 2015
+    - add no_load option
+
 0.081 Thu Dec 18 14:07:00 2014
     - fix tarball - used Mac's broken tar to create the tardist
 

@@ -4,7 +4,7 @@ use 5.008008;
 use strict;
 use warnings;
 
-our $VERSION = '0.081';
+our $VERSION = '0.09';
 
 my $allow_new_methods = 0;
 
@@ -20,11 +20,13 @@ sub new {
     Carp::croak("No module name provided to mock");
   }
 
-  my $module = $self->{module} . '.pm';
-  $module =~ s/::/\//g;
-  require $module;
+  if (!$self->{no_load}) {
+    my $module = $self->{module} . '.pm';
+    $module =~ s/::/\//g;
+    require $module;
+  }
 
-  $allow_new_methods = 1 if $self->{allow_new_methods};
+  $allow_new_methods = 1 if $self->{allow_new_methods} || $self->{no_load};
 
   return $self;
 }
@@ -140,6 +142,21 @@ To create methods that do not exist in the module that is being mocked.
 
 The default behavior is to not allow adding methods that do not exist.  This
 should stop mistyping method names when attempting to mock existing methods.
+
+=back
+
+=over 4
+
+=item no_load
+
+Default behavior is to load the real module before overriding individual methods.
+
+If this is not desired set no_load to 1 which will stop this from happening.
+
+If set then you are required to mock the whole module (or at least every command
+required for code to work).
+
+Setting no_load to 1 will force allow_new_methods to 1 as well.
 
 =back
 
